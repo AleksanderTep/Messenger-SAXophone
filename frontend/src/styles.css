@@ -86,3 +86,8 @@ input[aria-invalid="true"] { border-color: #b00020; }
   .chat-page { padding: 20px 15px; min-height: 450px; }
   .empty-chat { padding: 40px 15px; }
 }
+
+[role="alert"] { color: #a3152a; overflow-wrap: anywhere; }
+.profile-data { text-align: left; overflow-wrap: anywhere; }
+.profile-data dt { color: #666; margin-top: 18px; }
+.profile-data dd { margin: 5px 0; }
