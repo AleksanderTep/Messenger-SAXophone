@@ -21,8 +21,10 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-messenger}:${POSTGRES_PASSWORD:-local-messenger}@db:5432/${POSTGRES_DB:-messenger}
       APP_ENV: ${APP_ENV:-development}
+      AUTH_SECRET_KEY: ${AUTH_SECRET_KEY:-}
+      ACCESS_TOKEN_MINUTES: ${ACCESS_TOKEN_MINUTES:-60}
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
     depends_on:
       db:
         condition: service_healthy
@@ -37,7 +39,7 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
     ports:
-      - "127.0.0.1:8080:80"
+      - "127.0.0.1:${FRONTEND_PORT:-8080}:80"
     depends_on:
       backend:
         condition: service_healthy
