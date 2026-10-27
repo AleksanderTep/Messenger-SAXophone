@@ -1,0 +1,130 @@
+{
+  "baseline_tree": "2078430eb33a1f3243e4f67f35beacd558dd58ef",
+  "base_commit": "4ca77dcd8b7c4310aff69c7bef53dfbcc10c9d17",
+  "base_branch": "docs/S1-10-sprint-summary",
+  "note": "Task authors assigned explicitly by the project lead on 2026-10-27. Real review and successful checks remain required.",
+  "groups": [
+    {
+      "message": "S2-04 S2-05: add password hashing and token primitives",
+      "branch": "feature/S2-05-token-security",
+      "author": {
+        "name": "ArtChai",
+        "email": "chai.2004@mail.ru"
+      },
+      "check_kind": "backend",
+      "paths": [
+        "backend/app/config.py",
+        "backend/app/auth/security.py",
+        "backend/pyproject.toml",
+        "backend/requirements.lock"
+      ]
+    },
+    {
+      "message": "S2-06 S2-07 S2-08: add user storage and case insensitive identity",
+      "branch": "feature/S2-07-user-storage",
+      "author": {
+        "name": "uminamier-ui",
+        "email": "uminamier@gmail.com"
+      },
+      "check_kind": "backend",
+      "paths": [
+        "backend/app/models.py",
+        "backend/app/users/repository.py",
+        "backend/app/users/schemas.py",
+        "backend/app/users/service.py",
+        "backend/migrations/versions/0002_auth.py"
+      ]
+    },
+    {
+      "message": "S2-04 S2-05 S2-06: connect registration login and protected API",
+      "branch": "feature/S2-04-auth",
+      "author": {
+        "name": "ArtChai",
+        "email": "chai.2004@mail.ru"
+      },
+      "check_kind": "backend",
+      "paths": [
+        "backend/app/main.py",
+        "backend/app/auth/dependencies.py",
+        "backend/app/auth/routes.py",
+        "backend/app/users/routes.py"
+      ]
+    },
+    {
+      "message": "S2-13 S2-14: add registration and client session state",
+      "branch": "feature/S2-14-client-session",
+      "author": {
+        "name": "Slavik-04",
+        "email": "slava_sil.04@mail.ru"
+      },
+      "check_kind": "frontend",
+      "paths": [
+        "frontend/src/api.ts",
+        "frontend/src/auth.tsx",
+        "frontend/src/AuthPages.tsx"
+      ]
+    },
+    {
+      "message": "S2-13 S2-14: integrate protected profile and auth navigation",
+      "branch": "feature/S2-13-auth-ui",
+      "author": {
+        "name": "AleksanderTep",
+        "email": "teplenkos671@gmail.com"
+      },
+      "check_kind": "frontend",
+      "paths": [
+        "frontend/src/App.tsx",
+        "frontend/src/ProfilePage.tsx",
+        "frontend/src/styles.css",
+        "frontend/src/App.test.tsx",
+        "frontend/e2e/shell.spec.ts"
+      ]
+    },
+    {
+      "message": "S2-10 S2-11 S2-12: add demo seed and full auth CI",
+      "branch": "chore/S2-12-auth-ci",
+      "author": {
+        "name": "KisaLove5",
+        "email": "kisalove591@gmail.com"
+      },
+      "check_kind": "infra",
+      "paths": [
+        "backend/app/seed.py",
+        ".dockerignore",
+        ".env.example",
+        "docker-compose.yml",
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "message": "S2-15: automate auth API and browser scenarios",
+      "branch": "test/S2-15-auth",
+      "author": {
+        "name": "abdullahhuynan",
+        "email": "abdullahhuynan@gmail.com"
+      },
+      "check_kind": "qa",
+      "paths": [
+        "backend/tests/test_auth.py",
+        "frontend/e2e/auth.spec.ts",
+        "frontend/playwright.config.ts"
+      ]
+    },
+    {
+      "message": "S2-01 S2-02: document auth contract and sprint evidence",
+      "branch": "docs/S2-01-auth-contract",
+      "author": {
+        "name": "scorpdestroy",
+        "email": "shumilin.andrej@gmail.com"
+      },
+      "check_kind": "docs",
+      "paths": [
+        "README.md",
+        "docs/architecture.md",
+        "docs/auth-contract.md",
+        "docs/sprint-2.md",
+        "commit-plan-sprint-2.json"
+      ]
+    }
+  ]
+}
