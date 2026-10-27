@@ -9,10 +9,14 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from starlette.exceptions import HTTPException
 
+from app.auth.routes import router as auth_router
 from app.config import get_settings
 from app.db import get_db
+from app.users.routes import router as users_router
 
 app = FastAPI(title="Messenger SAXophone", version="0.1.0")
+app.include_router(auth_router)
+app.include_router(users_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,
@@ -33,7 +37,7 @@ async def http_error(request: Request, exc: HTTPException):
 @app.exception_handler(RequestValidationError)
 async def validation_error(request: Request, exc: RequestValidationError):
     return JSONResponse(
-        status_code=422,
+        status_code=400 if request.url.path.startswith(("/auth/", "/users")) else 422,
         content={"error": {"code": "validation_error", "message": "Invalid request"}},
     )
 
