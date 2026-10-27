@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background: white;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+a { color: #245a36; }
+button, a, input, textarea { outline-offset: 3px; }
+
+.app-shell {
+  display: flex;
+  min-height: 100dvh;
+  border: 1px solid #777;
+}
+
+.sidebar {
+  width: 30%;
+  max-width: 380px;
+  min-width: 240px;
+  background: #ccffcc;
+  border-right: 1px solid #777;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand { padding: 20px; color: #222; font-weight: bold; }
+.sidebar-title { position: relative; padding: 30px 15px; text-align: center; }
+.sidebar-title h2 { margin: 0; font-size: 22px; font-weight: normal; }
+.sidebar-empty { flex: 1; padding: 35px 20px; text-align: center; }
+.sidebar-empty p + p { font-size: 14px; }
+.sidebar-footer { margin-top: auto; padding: 25px 20px; display: flex; flex-direction: column; gap: 20px; }
+.close-settings { position: absolute; left: 15px; top: 24px; font-size: 30px; text-decoration: none; }
+.settings-list a { display: block; padding: 22px 15px; background: white; border-block: 1px solid #888; text-align: center; color: #222; }
+.settings-list a + a { border-top: 0; }
+
+main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.topbar { padding: 15px 20px; border-bottom: 1px solid #aaa; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+.server { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.server button { cursor: pointer; }
+h1 { margin: 0 0 25px; font-size: 24px; font-weight: normal; }
+p { line-height: 1.5; }
+.page { flex: 1; padding: 65px 25px; display: flex; justify-content: center; align-items: flex-start; }
+.card { width: 100%; max-width: 400px; padding: 30px; border: 1px solid #777; border-radius: 20px; text-align: center; }
+.field { display: flex; flex-direction: column; gap: 7px; text-align: left; margin: 20px 0; font-size: 16px; }
+input, textarea { width: 100%; min-width: 0; padding: 10px; border: 1px solid #777; background: white; border-radius: 0; }
+textarea { resize: vertical; }
+input:disabled, textarea:disabled { color: #666; background: #f8f8f8; }
+input[aria-invalid="true"] { border-color: #b00020; }
+.field small { color: #b00020; }
+.button { padding: 9px 25px; border: 1px solid #777; border-radius: 5px; background: #eee; color: #222; cursor: pointer; }
+.button:hover { background: #ddd; }
+.button:disabled { color: #777; cursor: default; background: #eee; }
+.placeholder-note { color: #666; font-size: 13px; margin-top: 22px; }
+.avatar-placeholder { width: 95px; height: 95px; border: 1px solid #777; border-radius: 50%; margin: 15px auto 30px; }
+.profile-page .card { border: 0; border-radius: 0; }
+.empty-chat { flex: 1; text-align: center; padding: 70px 20px; }
+.chat-page { flex: 1; padding: 30px; display: flex; flex-direction: column; min-height: 550px; }
+.chat-page h1 { text-align: center; }
+.message-area { flex: 1; color: #666; text-align: center; padding: 50px 0; }
+.message-input { border: 1px solid #999; padding: 12px; }
+.message-input textarea { display: block; margin: 10px 0; }
+
+@media (max-width: 700px) {
+  .app-shell { flex-direction: column; }
+  .sidebar { width: 100%; max-width: none; min-width: 0; border-right: 0; border-bottom: 1px solid #777; }
+  .brand { padding: 12px 15px; }
+  .sidebar-title { padding: 10px 15px; }
+  .sidebar-title h2 { font-size: 20px; }
+  .sidebar-empty { padding: 0 15px; }
+  .sidebar-empty p { margin: 8px 0; }
+  .sidebar-footer { flex-direction: row; justify-content: space-between; gap: 12px; padding: 15px; font-size: 14px; }
+  .close-settings { top: 2px; }
+  .topbar { flex-wrap: wrap; padding: 12px; font-size: 14px; }
+  .server { font-size: 12px; }
+  .page { padding: 30px 15px; }
+  .card { padding: 25px 20px; }
+  .chat-page { padding: 20px 15px; min-height: 450px; }
+  .empty-chat { padding: 40px 15px; }
+}
