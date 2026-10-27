@@ -1,0 +1,140 @@
+[
+  {
+    "message": "S1-01 S1-03 S1-04 S1-13: document scope, roles and architecture",
+    "paths": [
+      "README.md",
+      ".gitignore",
+      "docs/process.md",
+      "docs/architecture.md"
+    ],
+    "author": {
+      "name": "scorpdestroy",
+      "email": "shumilin.andrej@gmail.com"
+    },
+    "branch": "docs/S1-01-scope"
+  },
+  {
+    "message": "S1-05 S1-06: bootstrap FastAPI and service health",
+    "paths": [
+      "backend/pyproject.toml",
+      "backend/requirements.lock",
+      "backend/app/__init__.py",
+      "backend/app/config.py",
+      "backend/app/db.py",
+      "backend/app/main.py",
+      "backend/app/auth",
+      "backend/app/users",
+      "backend/app/chats",
+      "backend/app/messages",
+      "backend/app/search"
+    ],
+    "author": {
+      "name": "ArtChai",
+      "email": "chai.2004@mail.ru"
+    },
+    "branch": "feature/S1-05-api"
+  },
+  {
+    "message": "S1-07 S1-08 S1-09: add database schema, migration and BM25 design",
+    "paths": [
+      "backend/app/models.py",
+      "backend/alembic.ini",
+      "backend/migrations",
+      "docs/data-and-search.md"
+    ],
+    "author": {
+      "name": "uminamier-ui",
+      "email": "uminamier@gmail.com"
+    },
+    "branch": "feature/S1-08-schema"
+  },
+  {
+    "message": "S1-17: add shared form components and plain CSS styles",
+    "paths": [
+      "frontend/src/components",
+      "frontend/src/styles.css"
+    ],
+    "author": {
+      "name": "AleksanderTep",
+      "email": "teplenkos671@gmail.com"
+    },
+    "branch": "feature/S1-17-ui"
+  },
+  {
+    "message": "S1-14 S1-15: add React routes and messenger layout",
+    "paths": [
+      "frontend/package.json",
+      "frontend/package-lock.json",
+      "frontend/tsconfig.json",
+      "frontend/vite.config.ts",
+      "frontend/eslint.config.js",
+      "frontend/index.html",
+      "frontend/src/main.tsx",
+      "frontend/src/App.tsx",
+      "frontend/src/api.ts"
+    ],
+    "author": {
+      "name": "Slavik-04",
+      "email": "slava_sil.04@mail.ru"
+    },
+    "branch": "feature/S1-14-frontend"
+  },
+  {
+    "message": "S1-11: configure Docker Compose and readiness checks",
+    "paths": [
+      ".env.example",
+      ".dockerignore",
+      "docker-compose.yml",
+      "backend/Dockerfile",
+      "frontend/Dockerfile",
+      "frontend/nginx.conf"
+    ],
+    "author": {
+      "name": "KisaLove5",
+      "email": "kisalove591@gmail.com"
+    },
+    "branch": "chore/S1-11-compose"
+  },
+  {
+    "message": "S1-18 S1-19 S1-20: add smoke tests and review materials",
+    "paths": [
+      "backend/tests",
+      "frontend/src/test-setup.ts",
+      "frontend/src/App.test.tsx",
+      "frontend/playwright.config.ts",
+      "frontend/e2e",
+      "scripts/smoke.py",
+      "docs/testing.md",
+      "docs/review.md"
+    ],
+    "author": {
+      "name": "abdullahhuynan",
+      "email": "abdullahhuynan@gmail.com"
+    },
+    "branch": "test/S1-20-smoke"
+  },
+  {
+    "message": "S1-12: run checks, migration and container smoke in CI",
+    "paths": [
+      ".github/workflows/ci.yml"
+    ],
+    "author": {
+      "name": "KisaLove5",
+      "email": "kisalove591@gmail.com"
+    },
+    "branch": "chore/S1-12-ci"
+  },
+  {
+    "message": "S1-10: record task coverage and prepared commit groups",
+    "paths": [
+      "commit-plan.json",
+      "scripts/export_patches.py",
+      "docs/sprint-1.md"
+    ],
+    "author": {
+      "name": "scorpdestroy",
+      "email": "shumilin.andrej@gmail.com"
+    },
+    "branch": "docs/S1-10-sprint-summary"
+  }
+]
