@@ -17,7 +17,7 @@ Messenger SAXophone — учебный командный проект: веб-�
 
 Звонки, каналы, боты, передача файлов и сквозное шифрование не входят в первый MVP.
 
-## Предварительный стек
+## Стек
 
 - Backend: Python, FastAPI;
 - Frontend: React, TypeScript;
@@ -27,7 +27,7 @@ Messenger SAXophone — учебный командный проект: веб-�
 - автоматические проверки: GitHub Actions;
 - управление задачами: Pyrus.
 
-Стек может уточняться в ходе проектирования. Существенные изменения фиксируются в задаче Pyrus и обсуждаются с командой до реализации.
+Выбор подтверждён 27.10.2026. API — FastAPI, ORM — SQLAlchemy, миграции — Alembic; frontend — React + TypeScript + Vite. Подробности в [архитектуре](docs/architecture.md).
 
 ## Роли в команде
 
@@ -66,14 +66,14 @@ Messenger-SAXophone/
 
 ## Git-процесс
 
-### 1. Получить актуальную основную ветку
+### 1. Получить актуальную интеграционную ветку
 
 ```bash
-git switch main
-git pull --ff-only origin main
+git switch develop
+git pull --ff-only origin develop
 ```
 
-Работу нельзя начинать от устаревшей локальной ветки `main`.
+Работу нельзя начинать от устаревшей локальной ветки `develop`.
 
 ### 2. Создать отдельную ветку под задачу
 
@@ -100,11 +100,11 @@ git commit -m "TASK-014: add user registration"
 
 Не добавляйте в Git файлы `.env`, пароли, API-ключи, токены и другие секреты.
 
-### 4. Перед отправкой синхронизироваться с `main`
+### 4. Перед отправкой синхронизироваться с `develop`
 
 ```bash
 git fetch origin
-git rebase origin/main
+git rebase origin/develop
 ```
 
 После разрешения конфликтов необходимо повторно запустить относящиеся к задаче проверки и тесты.
@@ -139,3 +139,62 @@ git push -u origin feature/TASK-014-registration
 ## Лицензия
 
 Проект распространяется по лицензии GNU GPL v3. Полный текст находится в файле [LICENSE](LICENSE).
+
+## Быстрый запуск первого спринта
+
+Требуется Docker Desktop с Linux containers. Из папки репозитория:
+
+```bash
+cp .env.example .env
+docker compose up --build --wait
+```
+
+В PowerShell вместо cp можно использовать `Copy-Item .env.example .env`.
+Шаблон содержит только настройки локального мессенджера; не копируйте туда ключи Pyrus.
+Без .env окружение также запускается с локальными значениями по умолчанию.
+Если .env уже существует, сохраните нужные настройки перед копированием.
+
+- Интерфейс: http://localhost:8080
+- OpenAPI: http://localhost:8000/docs
+- Проверка процесса: http://localhost:8000/health
+- Проверка БД: http://localhost:8000/ready
+- PostgreSQL с хоста: localhost:55432; порт меняется через POSTGRES_PORT.
+
+Первый запуск автоматически применяет миграции. `docker compose down` останавливает
+окружение, сохраняя данные. `docker compose down -v` удаляет локальную БД.
+
+Сейчас работают оболочка, маршруты, состояние API, миграция и окружение.
+Вход, профиль и переписка пока заглушки. Подробная готовность — [Sprint 1](docs/sprint-1.md).
+
+## Запуск без контейнеров для разработки
+
+PostgreSQL можно оставить в контейнере: `docker compose up -d db`.
+
+```bash
+python -m venv .venv
+# Windows: .venv/Scripts/activate; Linux: source .venv/bin/activate
+pip install -r backend/requirements.lock
+pip install --no-deps -e backend
+cd backend
+alembic upgrade head
+uvicorn app.main:app --reload
+```
+
+DATABASE_URL читается из окружения или .env в текущей папке. По умолчанию это
+локальная PostgreSQL на 55432 с данными из .env.example. Для других реквизитов
+задайте DATABASE_URL явно; .env в корне автоматически читается Docker Compose,
+но не командами, запущенными из backend.
+
+В другом терминале: `cd frontend`, `npm ci`, `npm run dev`; интерфейс на localhost:5173.
+
+## Документы и проверки
+
+- [Архитектура и карта экранов](docs/architecture.md)
+- [Схема данных и BM25](docs/data-and-search.md)
+- [Scrum, роли, KPI и Definition of Done](docs/process.md)
+- [Тестирование](docs/testing.md), [шаблон review](docs/review.md)
+- [Ветки main/develop/release и авторство](docs/git-workflow.md)
+
+GitHub Actions проверяет backend, миграцию PostgreSQL, frontend, браузерные маршруты
+и сборку Docker Compose на push/PR. Публикация на сервер и CD требуют адреса
+стенда и отдельного релизного решения; в первом спринте настроен CI.
