@@ -9,14 +9,12 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from starlette.exceptions import HTTPException
 
-from app.auth.routes import router as auth_router
+from app.auth import router
 from app.config import get_settings
 from app.db import get_db
-from app.users.routes import router as users_router
 
 app = FastAPI(title="Messenger SAXophone", version="0.1.0")
-app.include_router(auth_router)
-app.include_router(users_router)
+app.include_router(router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,

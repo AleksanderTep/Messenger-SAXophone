@@ -6,9 +6,7 @@ from sqlalchemy import delete
 
 from app.db import SessionLocal
 from app.models import AuthSession
-from app.users.repository import find_identity
-from app.users.schemas import RegisterRequest
-from app.users.service import create_user
+from app.users import RegisterRequest, create_user, find_identity
 
 
 def seed(db, password: str):
