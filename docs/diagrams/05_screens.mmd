@@ -1,0 +1,7 @@
+flowchart LR
+ Register[/register] --> Login[/login]
+ Login -->|успех| Profile[/profile]
+ Profile -->|logout| Login
+ Profile -->|refresh| Me[GET /users/me]
+ Me -->|401| Login
+ Me -->|200| Profile

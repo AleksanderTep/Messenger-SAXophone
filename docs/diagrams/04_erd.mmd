@@ -1,0 +1,18 @@
+erDiagram
+ USERS ||--o{ AUTH_SESSIONS : has
+ USERS ||--o{ CHATS : "unused low/high"
+ CHATS ||--o{ CHAT_MEMBERS : unused
+ USERS ||--o{ CHAT_MEMBERS : unused
+ CHAT_MEMBERS ||--o{ MESSAGES : "unused sender"
+ USERS {
+ uuid id PK
+ string username UK
+ string email UK
+ string display_name
+ text password_hash
+ }
+ AUTH_SESSIONS {
+ uuid id PK
+ uuid user_id FK
+ timestamptz expires_at
+ }

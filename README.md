@@ -1,4 +1,4 @@
-# Messenger SAXophone — спринты 1–1
+# Messenger SAXophone — спринты 1–2
 
 Накопительный тематический снимок, подготовленный 28.10.2026 по пересмотренному плану. Это не историческое состояние репозитория на дату занятия. Настоящие даты и история коммитов сохранены.
 
@@ -7,5 +7,14 @@
 - [Рабочий процесс](docs/workflow.md)
 - [Наставничество](docs/mentoring.md)
 - [Задачи](docs/sprint-tasks.md)
+- [Архитектура](docs/architecture.md)
+- [API](docs/api-contract.md)
+- [Сценарии](docs/user-stories.md)
+- [Проверки](docs/test-strategy.md)
+- [01_context](<docs/diagrams/01_context.svg>)
+- [02_components](<docs/diagrams/02_components.svg>)
+- [03_deployment](<docs/diagrams/03_deployment.svg>)
+- [04_erd](<docs/diagrams/04_erd.svg>)
+- [05_screens](<docs/diagrams/05_screens.svg>)
 
 Реализация приложения относится к S4/S5 и в этот снимок не включена. main/develop сохраняют работающий код; release/0.1.0 — кандидат из develop. Упрощение: PR №3, https://github.com/scorpdestroy/Messenger-SAXophone/pull/3 .

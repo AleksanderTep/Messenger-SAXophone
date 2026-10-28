@@ -1,0 +1,4 @@
+flowchart LR
+ U[Пользователь] --> F[React в браузере]
+ F -->|HTTP JSON и Bearer| A[FastAPI]
+ A -->|SQLAlchemy| D[(PostgreSQL)]
