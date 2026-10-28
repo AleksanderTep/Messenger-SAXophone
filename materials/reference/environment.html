@@ -1,0 +1,12 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Подготовка рабочего окружения</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Подготовка рабочего окружения</h1>
+<p>Ответственный Вадим. Нужны Git, Python 3.12, Node.js 22/npm, Docker Desktop с Compose, редактор, доступ к GitHub и Pyrus.</p>
+<h2>Проверить инструменты</h2>
+<p>В PowerShell выполнить git --version, python --version, node --version, npm --version, docker compose version, docker info. Отсутствие команды означает проблему установки или PATH; после установки открыть новый терминал.</p>
+<h2>Выбрать приложение</h2>
+<p>Клонировать git clone git@github.com:scorpdestroy/Messenger-SAXophone.git и перейти в каталог. Проверить git status. main/develop содержат приложение; release/0.1.0 — кандидат из develop. Ветки sprint/1-setup, sprint/2-architecture, sprint/3-structure содержат документы и структуру, приложение там не запускается.</p>
+<h2>Запустить</h2>
+<p>В чистом checkout develop скопировать .env.example в .env, задать постоянный AUTH_SECRET_KEY для локальных сессий. Не включать .env в Git. docker compose up --build --wait --wait-timeout 180 запускает сервисы. По умолчанию UI http://localhost:8080, health http://localhost:8080/api/health, ready http://localhost:8080/api/ready. /profile по прямой ссылке открывает интерфейс, гостя переводит на вход.</p>
+<p>При занятом порте задать FRONTEND_PORT/BACKEND_PORT/POSTGRES_PORT в .env. В отдельном окружении упрощения использовался 8082; это локальное отличие, не стандарт README.</p>
+<h2>Проверить и остановить</h2>
+<p>docker compose ps — состояние, docker compose logs backend — журнал. При 503 /ready проверить готовность БД; при 502 через Nginx — backend. docker compose down останавливает сервисы, сохраняя volume; down -v удаляет данные, для обычной остановки его не использовать.</p>
+<p>Участник записывает свою дату, версии, адрес и результаты health/ready. Эта инструкция сама по себе не подтверждает проверку семи личных рабочих мест.</p></main></html>
