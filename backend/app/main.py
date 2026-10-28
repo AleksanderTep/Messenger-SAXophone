@@ -51,11 +51,13 @@ async def unexpected_error(request: Request, exc: Exception):
 
 @app.get("/health", tags=["system"])
 def health():
+    # Здесь не трогаем БД: проверяем, что сам сервер отвечает.
     return {"status": "ok", "service": "saxophone-api"}
 
 
 @app.get("/ready", tags=["system"])
 def ready(db: Session = Depends(get_db)):
+    # Для готовности приложения уже нужна живая БД, а не только запущенный Python.
     try:
         db.execute(text("SELECT 1"))
     except SQLAlchemyError:

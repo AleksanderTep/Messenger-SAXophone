@@ -16,6 +16,7 @@ def seed(db, password: str):
         if user:
             if user.email != email:
                 raise ValueError("Demo username belongs to a different account")
+            # Повторный запуск не меняет пароль уже существующего demo-аккаунта.
             continue
         create_user(
             db,

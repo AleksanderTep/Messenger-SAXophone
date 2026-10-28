@@ -17,6 +17,7 @@ class RegisterRequest(BaseModel):
     password: str = Field(min_length=10, max_length=128, repr=False)
     display_name: str = Field(default="", max_length=80)
 
+    # Пароль не обрезаем: пробел в нём может быть частью задуманного пароля.
     @field_validator("username", "email", "display_name", mode="before")
     @classmethod
     def strip_fields(cls, value):
@@ -46,6 +47,7 @@ class UserPublic(BaseModel):
 
 
 class UserSummary(BaseModel):
+    # В поиске показываем меньше данных, чем владельцу профиля: без почты.
     model_config = ConfigDict(from_attributes=True)
     id: UUID
     username: str
@@ -73,6 +75,7 @@ def search_users(db: Session, query: str, exclude_id, limit: int):
     query = query.strip().lower()
     if not query:
         return []
+    # autoescape оставляет % и _ обычными символами поиска, а не шаблоном SQL.
     return db.scalars(
         select(User)
         .where(
@@ -100,6 +103,7 @@ def create_user(db: Session, data: RegisterRequest):
     try:
         db.commit()
     except IntegrityError:
+        # Два запроса могли пройти find_conflict одновременно; последнее слово за БД.
         db.rollback()
         raise HTTPException(409, "Username or email already registered") from None
     db.refresh(user)

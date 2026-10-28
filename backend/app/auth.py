@@ -42,6 +42,7 @@ def current_session(
         session_id, user_id = UUID(payload["jti"]), UUID(payload["sub"])
     except (jwt.InvalidTokenError, ValueError, TypeError, KeyError):
         raise unauthorized() from None
+    # Одной подписи JWT мало: после выхода запись сессии удалена из БД.
     session = db.get(AuthSession, session_id)
     if not session or session.user_id != user_id:
         raise unauthorized()
@@ -90,6 +91,7 @@ def login(data: LoginRequest, response: Response, db: Session = Depends(get_db))
         )
     session_id = uuid4()
     token, expires = create_token(user.id, session_id)
+    # jti в токене и id в таблице обозначают одну и ту же сессию.
     db.add(AuthSession(id=session_id, user_id=user.id, expires_at=expires))
     db.commit()
     response.headers["Cache-Control"] = "no-store"

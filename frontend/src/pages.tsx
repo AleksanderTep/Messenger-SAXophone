@@ -27,6 +27,7 @@ export function AuthPage({ register = false, user, loading, onLogin }: AuthPageP
     event.preventDefault()
     setError('')
     setRegistered(false)
+    // Проверки на клиенте помогают исправить ввод; сервер проверит данные ещё раз.
     const next: Record<string, string> = {}
     if (register) {
       if (!/^[a-zA-Z0-9_]{3,32}$/.test(values.username.trim())) next.username = 'От 3 до 32 латинских букв, цифр или _.'
@@ -105,6 +106,7 @@ export function ProfilePage({ user }: { user: User | null }) {
   </Card></div>
 }
 
+// Ниже только оболочки экранов: API переписки и отправка сообщений не подключены.
 export function EmptyChat() {
   return <div className="empty-chat">
     <h1>Окно переписки</h1>

@@ -33,6 +33,7 @@ export function App() {
   useEffect(() => {
     const controller = new AbortController()
     const token = sessionStorage.getItem(tokenKey)
+    // После обновления страницы токен остаётся, а данные пользователя загружаем заново.
     async function loadUser() {
       if (!token) {
         setLoading(false)
@@ -42,6 +43,7 @@ export function App() {
       setError('')
       try {
         const data = await request<User>('/users/me', { signal: controller.signal })
+        // Старый ответ не должен вернуть пользователя после смены токена или ухода со страницы.
         if (!controller.signal.aborted && token === sessionStorage.getItem(tokenKey)) {
           setUser(data)
         }
@@ -74,6 +76,7 @@ export function App() {
     try {
       if (sessionStorage.getItem(tokenKey)) {
         try {
+          // Сначала отзываем сессию на сервере. При сетевой ошибке даём повторить выход.
           await request('/auth/logout', { method: 'POST' })
         } catch (e) {
           if (!(e instanceof ApiError && e.status === 401)) throw e
@@ -89,6 +92,7 @@ export function App() {
     }
   }
 
+  // Это выбор экрана для пользователя; права на данные всё равно проверяет сервер.
   function protect(children: ReactNode) {
     if (loading) return <div className="page" role="status">Загружаем профиль…</div>
     if (error) return <div className="page"><Card>
