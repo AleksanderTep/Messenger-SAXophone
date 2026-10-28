@@ -1,0 +1,21 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Контракт существующего API</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Контракт существующего API</h1>
+<p>В браузере адреса имеют префикс /api; proxy убирает его перед FastAPI. Формат ошибки: {&quot;error&quot;:{&quot;code&quot;:&quot;...&quot;,&quot;message&quot;:&quot;...&quot;}}.</p>
+<div class="table-wrap"><table>
+<tr><th>Метод</th><th>Backend-путь</th><th>Вход</th><th>Ответ</th></tr>
+<tr><td>GET</td><td>/health</td><td>—</td><td>200 status/service; проверка процесса</td></tr>
+<tr><td>GET</td><td>/ready</td><td>—</td><td>200 при доступной БД; 503 при ошибке БД</td></tr>
+<tr><td>POST</td><td>/auth/register</td><td>username, email, password, display_name?</td><td>201 UserPublic; 400; 409</td></tr>
+<tr><td>POST</td><td>/auth/login</td><td>identity, password</td><td>200 access_token/token_type/expires_in/user; 400; 401</td></tr>
+<tr><td>POST</td><td>/auth/logout</td><td>Bearer</td><td>204 без тела; 401</td></tr>
+<tr><td>GET</td><td>/users/me</td><td>Bearer</td><td>200 UserPublic; 401</td></tr>
+<tr><td>GET</td><td>/users</td><td>Bearer, query, limit</td><td>200 UserSummary[]; 400; 401</td></tr>
+</table></div>
+<p>UserPublic: id, username, email, display_name. UserSummary: id, username, display_name. Поиск не показывает почту, исключает себя и ограничен 1–50 результатами; пустой query возвращает []. Это поиск пользователей, а не сообщений.</p>
+<p>Логин: 3–32 латинские буквы/цифры/_, внешние пробелы удаляются, регистр понижается. Email приводится к нижнему регистру, ограничен 254 символами. Пароль регистрации: 10–128 символов, не обрезается. Отображаемое имя: до 80 символов; пустое заменяется логином.</p>
+<p>Подпись JWT — HS256. Проверяются sub, jti, iat, exp, iss, aud и запись auth_sessions. В development без AUTH_SECRET_KEY создаётся ключ процесса; для постоянных сессий нужен постоянный ключ окружения. Полного refresh-token потока нет: после истечения нужен новый вход.</p>
+<p>Endpoint создания чата, отправки сообщения и WebSocket в финальном API отсутствуют.</p>
+<h2>Примеры запросов и ответов</h2>
+<p>POST /auth/register: {&quot;username&quot;:&quot;student_demo&quot;,&quot;email&quot;:&quot;student_demo@example.test&quot;,&quot;password&quot;:&quot;Example-only-password-123&quot;,&quot;display_name&quot;:&quot;Участник&quot;}. Данные вымышленные. Ответ 201: id, username, email, display_name; без hash.</p>
+<p>POST /auth/login: {&quot;identity&quot;:&quot;student_demo&quot;,&quot;password&quot;:&quot;Example-only-password-123&quot;}. Ответ 200: access_token, token_type=&quot;bearer&quot;, expires_in, user. Реальный токен в документ не включается.</p>
+<p>GET /users/me и POST /auth/logout требуют Authorization: Bearer &lt;access_token&gt;. Logout возвращает 204 без тела; прежний токен затем получает 401. GET /users?query=student&amp;limit=10 возвращает id/username/display_name без email, исключает себя.</p>
+<p>Пример 409: {&quot;error&quot;:{&quot;code&quot;:&quot;http_409&quot;,&quot;message&quot;:&quot;Username or email already registered&quot;}}. Ошибка ввода: {&quot;error&quot;:{&quot;code&quot;:&quot;validation_error&quot;,&quot;message&quot;:&quot;Invalid request&quot;}}. На публичном адресе перед путём добавляется /api.</p></main></html>

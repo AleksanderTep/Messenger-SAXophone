@@ -1,0 +1,5 @@
+flowchart LR
+ Browser[Браузер :8080] --> N[Nginx :80]
+ N -->|/api без префикса| A[FastAPI :8000]
+ A --> D[db:5432]
+ D --> V[(postgres_data)]

@@ -1,0 +1,14 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Стратегия проверки финального объёма</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Стратегия проверки финального объёма</h1>
+<div class="table-wrap"><table>
+<tr><th>Уровень</th><th>Где</th><th>Что доказывает</th></tr>
+<tr><td>Unit/сервис</td><td>backend/tests/test_auth.py</td><td>Нормализация, hash, конфликты и базовые операции</td></tr>
+<tr><td>API</td><td>TestClient в backend/tests</td><td>Коды 201/400/401/409, защита маршрутов, отсутствие hash в ответе</td></tr>
+<tr><td>PostgreSQL</td><td>RUN_DB_TESTS=1, отдельная мигрированная БД</td><td>Реальные индексы, FK, миграции и ограничения</td></tr>
+<tr><td>Frontend unit</td><td>frontend/src/App.test.tsx</td><td>Ошибки, загрузка, гостевой переход, сессия</td></tr>
+<tr><td>Browser E2E</td><td>frontend/e2e/auth.spec.ts</td><td>register → login → profile → refresh → logout на 375/1440 px</td></tr>
+<tr><td>Smoke</td><td>scripts/smoke.py и Compose healthcheck</td><td>Запуск процесса, БД и HTTP через proxy</td></tr>
+<tr><td>Ручной разбор</td><td>Общая демонстрация</td><td>Участник сам показывает сценарий и объясняет свои файлы</td></tr>
+</table></div>
+<p>P0: не запускается приложение, невозможен вход/регистрация для валидных данных, доступ к чужому профилю, выдача password_hash/пароля, действующий токен после logout. P1: неверное сообщение об ошибке, отсутствие повтора сетевого запроса, неудобный мобильный layout при сохранённой основной функции.</p>
+<p>Подтверждённые локальные результаты прежней проверки: 32 backend-теста PostgreSQL, 11 frontend unit-тестов и 5 browser E2E. Это сохранённые результаты, не новый запуск 28.10. Последний проверенный CI develop: https://github.com/scorpdestroy/Messenger-SAXophone/actions/runs/40540606835 .</p>
+<p>При ошибке UI сохраняются screenshot и trace; workflow прикладывает их только при failure. При успешном запуске отсутствие failure-artifact нормально. Реальную передачу приложения на внешний production-сервер не тестировали.</p></main></html>

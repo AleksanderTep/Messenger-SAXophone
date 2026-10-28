@@ -1,0 +1,9 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Четыре пользовательских сценария</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Четыре пользовательских сценария</h1>
+<h2>Регистрация</h2>
+<p>Гость вводит username, email, пароль и необязательное display_name. Клиент проверяет поля; сервер повторяет валидацию. Успех — 201 и предложение войти, без автоматической сессии. Неверный ввод — 400; занятый логин/почта — 409. Критерий: аккаунт один, password_hash не возвращается.</p>
+<h2>Вход</h2>
+<p>Пользователь вводит логин либо почту и пароль. Успех — JWT и разрешённые поля профиля; клиент открывает /profile. Неверный пароль и неизвестный аккаунт возвращают одинаковый 401. Критерий: пароль не попадает в sessionStorage, запросы защищённых данных отправляют Bearer.</p>
+<h2>Профиль</h2>
+<p>Гость открывает /profile и переходит на /login. С токеном сначала видит загрузку, затем имя/логин/почту. Сетевая ошибка даёт повтор. После refresh /users/me восстанавливает пользователя; 401 удаляет токен и не вызывает бесконечный цикл. Критерий: показываются только поля текущего пользователя.</p>
+<h2>Выход</h2>
+<p>Клиент вызывает /auth/logout; сервер удаляет текущую запись сессии, клиент удаляет токен. Старый токен получает 401. При сетевой ошибке выход предлагается повторить, а не объявляется завершённым. Другие сессии пользователя остаются действительными.</p></main></html>
