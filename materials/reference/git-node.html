@@ -1,0 +1,11 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Памятка по Git и npm</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Памятка по Git и npm</h1>
+<p>Ответственный Вячеслав Силантьев. Git хранит историю; commit фиксирует локальное изменение; push публикует ветку; PR предлагает слияние. Автор PR определяется вошедшим аккаунтом. Review выполняет реальный проверяющий.</p>
+<ul>
+<li>Проверить git status и git branch --show-current; не сбрасывать чужую работу.</li>
+<li>От актуального develop создать ветку задачи. В sprint/* находится документация, не приложение.</li>
+<li>Изменить согласованный участок. Проверить git diff, добавить явные файлы через git add -- путь, затем git diff --cached.</li>
+<li>Создать понятный commit с номером задачи, проверить git show, опубликовать ветку.</li>
+<li>Открыть PR в develop с проверками; другой участник читает diff. После исправлений и CI принимается решение о merge.</li>
+</ul>
+<p>Node.js запускает инструменты разработки, браузер — интерфейс. npm управляет зависимостями и командами package.json. В frontend приложения npm ci устанавливает версии из lock-файла; npm run dev — Vite; npm run lint — проверка; npm test — unit; npm run build — сборка; npm run test:e2e — браузерные сценарии. Полный auth E2E требует работающий API и E2E_API=1.</p>
+<p>node_modules, dist, .env и ключи не коммитят. Missing package.json в sprint/* означает, что открыта ветка материалов; использовать отдельный чистый checkout приложения.</p></main></html>

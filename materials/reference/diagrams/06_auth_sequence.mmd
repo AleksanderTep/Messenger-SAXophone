@@ -1,0 +1,17 @@
+sequenceDiagram
+ participant B as React
+ participant A as FastAPI
+ participant S as security + auth.py
+ participant D as PostgreSQL
+ B->>A: POST /auth/login
+ A->>D: find user
+ A->>S: verify hash + create JWT
+ A->>D: INSERT AuthSession
+ A-->>B: token + user
+ B->>A: GET /users/me + Bearer
+ A->>S: verify claims/session
+ S->>D: get session/user
+ A-->>B: UserPublic
+ B->>A: POST /auth/logout
+ A->>D: DELETE session
+ A-->>B: 204

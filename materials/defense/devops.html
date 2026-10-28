@@ -1,0 +1,22 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Вадим — памятка для защиты</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Вадим — памятка для защиты</h1>
+<p>Роль: DevOps / интеграция. Ответы должны соответствовать тому, что ты сам делал или реально разбирал. Формулировка «отвечал за материал» не означает, что всю реализацию написал один.</p>
+<h2>Спринт 1 — подготовка</h2>
+<p>Показать репозиторий, инструкцию окружения и правила: main/develop, отдельная ветка задачи, commit, push, PR и review. Показать .env.example; объяснить, почему секреты не кладут в Git. Задачи: S1-02, S1-04.</p>
+<h2>Спринт 2 — архитектура</h2>
+<p>Показать диаграмму развёртывания: браузер → Nginx/frontend → backend → PostgreSQL. Объяснить порты, внутреннюю сеть, /api proxy и volume БД. Задача: S2-10.</p>
+<h2>Спринт 3 — структура</h2>
+<p>Открыть docker-compose.yml, Dockerfile, nginx.conf и workflow CI. Объяснить: Dockerfile собирает образ; Compose связывает сервисы; Nginx раздаёт клиент и передаёт API-запросы; CI проверяет изменения. Задача: S3-09.</p>
+<h2>К каким вопросам подготовиться</h2>
+<p>Чем образ отличается от контейнера? Зачем volume? Чем localhost браузера отличается от имени db внутри сети Compose? Почему CI не означает, что уже настроен внешний CD?</p>
+<h2>Что сказать о впечатлениях</h2>
+<p>Подготовить свой пример удобства общего окружения и трудности: порты, переменные, готовность БД или порядок запуска. Утверждать только то, что сам проверял.</p>
+<h2>Проверка готовности</h2>
+<ul>
+<li>Сам открой материал/код и объясни его за 1–2 минуты.</li>
+<li>Покажи конкретную задачу и результат; назови человека, с которым связан твой участок.</li>
+<li>Подготовь один вопрос коллеге и один ответ про соседний модуль.</li>
+<li>Назови, что ещё требует проверки или приёмки.</li>
+<li>Для S3 используй карту файлов выбранной версии: PR №3 ещё требует отдельного merge; см. общий чек-лист.</li>
+</ul>
+<h2>Следующие спринты</h2>
+<p><a href="next-sprints/devops.html">Моя инструкция по S4/S5</a>.</p></main></html>

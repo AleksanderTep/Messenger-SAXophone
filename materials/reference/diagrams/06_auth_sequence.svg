@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="1060" viewBox="0 0 1250 1060" role="img" aria-label="6. Последовательность входа, профиля и выхода">
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#50627b"/></marker></defs>
+<rect width="1250" height="1060" fill="#f8fafc"/>
+<text x="36" y="42" font-family="Arial" font-size="24" font-weight="bold" fill="#17243c">6. Последовательность входа, профиля и выхода</text>
+<text x="120" y="100" text-anchor="middle" font-family="Arial" font-size="15" fill="#26364e">React / браузер</text>
+<path d="M120 125V960" stroke="#a9b2c1" stroke-dasharray="5 6"/>
+<text x="390" y="100" text-anchor="middle" font-family="Arial" font-size="15" fill="#26364e">FastAPI routes</text>
+<path d="M390 125V960" stroke="#a9b2c1" stroke-dasharray="5 6"/>
+<text x="660" y="100" text-anchor="middle" font-family="Arial" font-size="15" fill="#26364e">security / deps</text>
+<path d="M660 125V960" stroke="#a9b2c1" stroke-dasharray="5 6"/>
+<text x="940" y="100" text-anchor="middle" font-family="Arial" font-size="15" fill="#26364e">repository / ORM</text>
+<path d="M940 125V960" stroke="#a9b2c1" stroke-dasharray="5 6"/>
+<text x="1160" y="100" text-anchor="middle" font-family="Arial" font-size="15" fill="#26364e">PostgreSQL</text>
+<path d="M1160 125V960" stroke="#a9b2c1" stroke-dasharray="5 6"/>
+<path d="M120 160 L390 160" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="146" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">1. POST /auth/login: identity + password</text>
+<path d="M390 215 L940 215" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="201" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">2. find_identity</text>
+<path d="M940 270 L1160 270" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="256" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">3. SELECT user</text>
+<path d="M390 325 L660 325" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="311" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">4. verify_password / create_token</text>
+<path d="M390 380 L1160 380" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="366" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">5. INSERT AuthSession + commit</text>
+<path d="M390 435 L120 435" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="421" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">6. token + UserPublic (200)</text>
+<path d="M120 490 L390 490" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="476" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">7. GET /users/me + Bearer</text>
+<path d="M390 545 L660 545" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="531" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">8. decode JWT + проверить сессию</text>
+<path d="M660 600 L1160 600" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="586" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">9. найти AuthSession и User</text>
+<path d="M390 655 L120 655" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="641" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">10. разрешённые поля (200)</text>
+<path d="M120 710 L390 710" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="696" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">11. POST /auth/logout + Bearer</text>
+<path d="M390 765 L1160 765" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="751" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">12. DELETE текущей сессии + commit</text>
+<path d="M390 820 L120 820" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="806" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">13. 204 → удалить токен</text>
+<path d="M120 875 L390 875" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="861" text-anchor="start" font-family="Arial" font-size="13" fill="#26364e">14. Старый токен → 401</text>
+<text x="45" y="985" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Регистрация отдельно: RegisterRequest → create_user → hash → INSERT User → 201. Она не создаёт сессию.</text>
+<text x="36" y="1036" text-anchor="start" font-family="Arial" font-size="13" fill="#59697f">Срез develop 674d7ea · подготовлено 28.10.2026 · серые блоки — неработающий задел</text>
+</svg>

@@ -1,0 +1,39 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Проектируемая карта реализации</title><style>body{font:17px/1.65 Arial,sans-serif;color:#243348;background:#f1f4f7;margin:0}main{max-width:1080px;margin:24px auto;padding:32px;background:white}h1{line-height:1.2}h2{margin-top:32px}li{margin:9px 0}a{color:#126b75}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccc;padding:8px;vertical-align:top}code{background:#eee}img{max-width:100%}.table-wrap{overflow:auto}@media(max-width:700px){main{margin:0;padding:18px}}</style><main><a href="../index.html">Оглавление</a><h1>Проектируемая карта реализации</h1>
+<p>В этом снимке находятся только описания и папки с README. Перечень ниже объясняет структуру упрощённого приложения из PR №3, а не наличие этих исходников в данной ветке. Фактическая реализация сохранена в develop и ветке PR.</p>
+<h1>Простая карта кода</h1>
+<p>После S5-13 backend/app содержит 9 Python-файлов вместо 18; frontend/src — 7 файлов TypeScript вместо 9, включая тест и его настройку. Папки пустых будущих Python-модулей удалены. Функции, API, таблицы, проверки паролей/сессий, CSS и экранные сценарии сохранены.</p>
+<h2>С чего начать чтение</h2>
+<ol>
+<li><code>backend/app/main.py</code>: создание приложения, router, ошибки, /health и /ready.</li>
+<li><code>backend/app/auth.py</code>: входной HTTP-запрос, текущая сессия, register/login/logout/me/search.</li>
+<li><code>backend/app/users.py</code>: правила пользовательских данных, запросы и создание аккаунта.</li>
+<li><code>backend/app/models.py</code> и <code>db.py</code>: таблицы и сессия БД.</li>
+<li><code>backend/app/security.py</code>: hash и JWT; параметры защиты не упрощались.</li>
+<li><code>frontend/src/App.tsx</code>: обычные useState, восстановление пользователя, login/logout и маршруты.</li>
+<li><code>frontend/src/pages.tsx</code>: формы, профиль и сохранённые оболочки чата; данные приходят через props.</li>
+<li><code>frontend/src/api.ts</code> и <code>components.tsx</code>: HTTP-запрос и три общих UI-компонента.</li>
+</ol>
+<h2>Куда переехали старые файлы</h2>
+<div class="table-wrap"><table>
+<tr><th>Было</th><th>Стало</th></tr>
+<tr><td>app/auth/routes.py</td><td>app/auth.py</td></tr>
+<tr><td>app/auth/dependencies.py</td><td>app/auth.py</td></tr>
+<tr><td>app/users/routes.py</td><td>app/auth.py</td></tr>
+<tr><td>app/auth/security.py</td><td>app/security.py</td></tr>
+<tr><td>app/users/schemas.py</td><td>app/users.py</td></tr>
+<tr><td>app/users/repository.py</td><td>app/users.py</td></tr>
+<tr><td>app/users/service.py</td><td>app/users.py</td></tr>
+<tr><td>src/auth.tsx (Context + useAuth)</td><td>обычное состояние и функции в src/App.tsx</td></tr>
+<tr><td>src/AuthPages.tsx</td><td>AuthPage в src/pages.tsx, проверка protect в App.tsx</td></tr>
+<tr><td>src/ProfilePage.tsx</td><td>ProfilePage в src/pages.tsx</td></tr>
+<tr><td>src/components/ui.tsx</td><td>src/components.tsx</td></tr>
+<tr><td>пустые app/chats, app/messages, app/search</td><td>удалены; таблицы в модели/миграциях сохранены</td></tr>
+</table></div>
+<p>Отдельных слоёв repository/service и собственного useAuth-хука больше нет. При создании пользователя create_user вызывает функции в том же users.py; промежуточные импорты не нужны. Криптографические функции оставлены отдельно, чтобы их можно было прочитать и проверить целиком.</p>
+<h2>Один путь backend</h2>
+<p><code>POST /auth/register</code> → RegisterRequest в users.py → register в auth.py → create_user в users.py → hash_password в security.py → User/commit. Ошибки и разрешённый ответ не изменились.</p>
+<h2>Один путь frontend</h2>
+<p>AuthPage в pages.tsx вызывает переданный onLogin. Функция login в App.tsx отправляет запрос, сохраняет токен и пользователя. App выбирает страницу через protect. ProfilePage получает user как prop и показывает имя/логин/почту. Отдельного Provider между App и страницами нет.</p>
+<h2>Что не удаляли</h2>
+<p>Таблицы chats/chat_members/messages нужны для совместимости существующих миграций и тестов. Их наличие всё ещё не означает работающую переписку. Оболочки экранов сохранены для совпадения внешнего вида. Удаление таблиц, изменение функционала или внешнего вида в S5-13 не входит.</p>
+<p><a href="architecture.html">Архитектура</a> · <a href="api-contract.html">Контракт API</a> · <a href="peer-review.html">Взаимный разбор</a>.</p></main></html>

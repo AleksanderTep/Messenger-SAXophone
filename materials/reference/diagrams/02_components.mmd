@@ -1,0 +1,5 @@
+flowchart LR
+ Browser[Браузер] --> Frontend[React: экраны и состояние]
+ Frontend --> API[FastAPI: HTTP и авторизация]
+ API --> Data[SQLAlchemy: модели и запросы]
+ Data --> DB[(PostgreSQL)]

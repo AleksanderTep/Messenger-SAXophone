@@ -1,0 +1,27 @@
+# Где искать пояснения к коду
+
+Комментарии добавлены в PR №3, commit ab35da5. Изменений поведения нет: сравнение AST Python, JavaScript без комментариев и конфигураций совпало.
+
+- [backend/app/main.py:54](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/main.py#L54) — Здесь не трогаем БД: проверяем, что сам сервер отвечает.
+- [backend/app/main.py:60](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/main.py#L60) — Для готовности приложения уже нужна живая БД, а не только запущенный Python.
+- [backend/app/auth.py:45](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/auth.py#L45) — Одной подписи JWT мало: после выхода запись сессии удалена из БД.
+- [backend/app/auth.py:94](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/auth.py#L94) — jti в токене и id в таблице обозначают одну и ту же сессию.
+- [backend/app/security.py:13](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/security.py#L13) — Случайная соль даёт разные хеши даже для одинаковых паролей.
+- [backend/app/security.py:57](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/security.py#L57) — Токен подписан, но не зашифрован. Пароль в него не кладём.
+- [backend/app/users.py:20](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/users.py#L20) — Пароль не обрезаем: пробел в нём может быть частью задуманного пароля.
+- [backend/app/users.py:50](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/users.py#L50) — В поиске показываем меньше данных, чем владельцу профиля: без почты.
+- [backend/app/users.py:78](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/users.py#L78) — autoescape оставляет % и _ обычными символами поиска, а не шаблоном SQL.
+- [backend/app/users.py:106](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/users.py#L106) — Два запроса могли пройти find_conflict одновременно; последнее слово за БД.
+- [backend/app/models.py:49](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/models.py#L49) — Таблицы ниже оставлены как задел схемы. Отправки сообщений в приложении пока нет.
+- [backend/app/seed.py:19](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/app/seed.py#L19) — Повторный запуск не меняет пароль уже существующего demo-аккаунта.
+- [backend/tests/test_health.py:27](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/backend/tests/test_health.py#L27) — Имитируем отказ БД внутри теста, чтобы не останавливать настоящий PostgreSQL.
+- [frontend/src/App.tsx:36](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/App.tsx#L36) — После обновления страницы токен остаётся, а данные пользователя загружаем заново.
+- [frontend/src/App.tsx:46](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/App.tsx#L46) — Старый ответ не должен вернуть пользователя после смены токена или ухода со страницы.
+- [frontend/src/App.tsx:79](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/App.tsx#L79) — Сначала отзываем сессию на сервере. При сетевой ошибке даём повторить выход.
+- [frontend/src/App.tsx:95](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/App.tsx#L95) — Это выбор экрана для пользователя; права на данные всё равно проверяет сервер.
+- [frontend/src/api.ts:30](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/api.ts#L30) — Запоздавший 401 от старого запроса не должен стереть новый токен после входа.
+- [frontend/src/api.ts:41](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/api.ts#L41) — У успешного logout нет тела: response.json() здесь дал бы ошибку.
+- [frontend/src/pages.tsx:30](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/pages.tsx#L30) — Проверки на клиенте помогают исправить ввод; сервер проверит данные ещё раз.
+- [frontend/src/pages.tsx:109](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/src/pages.tsx#L109) — Ниже только оболочки экранов: API переписки и отправка сообщений не подключены.
+- [docker-compose.yml:11](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/docker-compose.yml#L11) — Данные БД остаются при пересоздании контейнера; down -v удалит и volume.
+- [frontend/nginx.conf:6](https://github.com/scorpdestroy/Messenger-SAXophone/blob/ab35da54aebd746ea8628fc2acade548d8a90a11/frontend/nginx.conf#L6) — Слеш в конце убирает /api/: сервер получает /health, а не /api/health.

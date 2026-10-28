@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="730" viewBox="0 0 1200 730" role="img" aria-label="5. Карта экранов и состояний">
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#50627b"/></marker></defs>
+<rect width="1200" height="730" fill="#f8fafc"/>
+<text x="36" y="42" font-family="Arial" font-size="24" font-weight="bold" fill="#17243c">5. Карта экранов и состояний</text>
+<rect x="45" y="100" width="295" height="155" rx="12" fill="#fff" stroke="#83aaa2" stroke-width="1.5"/>
+<text x="61" y="130" text-anchor="start" font-family="Arial" font-size="17" fill="#26364e">/register</text>
+<text x="61" y="158" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Поля + клиентская проверка</text>
+<text x="61" y="179" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">201 → предложение войти</text>
+<text x="61" y="200" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">400/409 → ошибка формы</text>
+<rect x="455" y="100" width="295" height="155" rx="12" fill="#fff" stroke="#83aaa2" stroke-width="1.5"/>
+<text x="471" y="130" text-anchor="start" font-family="Arial" font-size="17" fill="#26364e">/login или /</text>
+<text x="471" y="158" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Логин/почта и пароль</text>
+<text x="471" y="179" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Вход → токен и user</text>
+<text x="471" y="200" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">401 → общая ошибка</text>
+<rect x="865" y="100" width="290" height="155" rx="12" fill="#fff" stroke="#83aaa2" stroke-width="1.5"/>
+<text x="881" y="130" text-anchor="start" font-family="Arial" font-size="17" fill="#26364e">/profile — защищён</text>
+<text x="881" y="158" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">loading → данные</text>
+<text x="881" y="179" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Ошибка сети → повтор</text>
+<text x="881" y="200" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Нет user → /login</text>
+<path d="M340 175 L455 175" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="397.5" y="166.0" text-anchor="middle" font-family="Arial" font-size="12" fill="#26364e">войти</text>
+<path d="M750 175 L865 175" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="807.5" y="166.0" text-anchor="middle" font-family="Arial" font-size="12" fill="#26364e">успех</text>
+<rect x="455" y="360" width="295" height="145" rx="12" fill="#fff" stroke="#83aaa2" stroke-width="1.5"/>
+<text x="471" y="390" text-anchor="start" font-family="Arial" font-size="17" fill="#26364e">Protected</text>
+<text x="471" y="418" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Сначала loading</text>
+<text x="471" y="439" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Затем error с retry</text>
+<text x="471" y="460" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Затем user или Navigate</text>
+<path d="M1010 255 L1010 440" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1010.0" y="338.5" text-anchor="middle" font-family="Arial" font-size="12" fill="#26364e">refresh</text>
+<path d="M1010 440 L750 440" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="880.0" y="431.0" text-anchor="middle" font-family="Arial" font-size="12" fill="#26364e">/users/me</text>
+<rect x="45" y="530" width="295" height="105" rx="12" fill="#edf0f4" stroke="#a0a9b8" stroke-width="1.5"/>
+<text x="61" y="560" text-anchor="start" font-family="Arial" font-size="17" fill="#26364e">/dialogs и /chat/:id</text>
+<text x="61" y="588" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Защищённые оболочки</text>
+<text x="61" y="609" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Отправка отключена</text>
+<rect x="865" y="535" width="290" height="100" rx="12" fill="#fff" stroke="#83aaa2" stroke-width="1.5"/>
+<text x="881" y="565" text-anchor="start" font-family="Arial" font-size="17" fill="#26364e">Logout</text>
+<text x="881" y="593" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">POST /auth/logout</text>
+<text x="881" y="614" text-anchor="start" font-family="Arial" font-size="14" fill="#26364e">Удаление токена → вход</text>
+<path d="M1010 535 L1010 470" fill="none" stroke="#50627b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="45" y="390" text-anchor="start" font-family="Arial" font-size="16" fill="#26364e">Неизвестный маршрут показывает страницу 404.</text>
+<text x="45" y="425" text-anchor="start" font-family="Arial" font-size="16" fill="#26364e">Просмотр профиля есть; редактора данных нет.</text>
+<text x="36" y="706" text-anchor="start" font-family="Arial" font-size="13" fill="#59697f">Срез develop 674d7ea · подготовлено 28.10.2026 · серые блоки — неработающий задел</text>
+</svg>

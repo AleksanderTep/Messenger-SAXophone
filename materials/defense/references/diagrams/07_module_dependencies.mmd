@@ -1,0 +1,11 @@
+flowchart TD
+ App[App.tsx состояние и маршруты] --> Pages[pages.tsx формы и профиль]
+ App --> API[api.ts HTTP]
+ Pages --> API
+ API --> Auth[auth.py HTTP и сессии]
+ Auth --> Users[users.py схемы и операции]
+ Auth --> Security[security.py hash и JWT]
+ Users --> Security
+ Users --> Models[models.py и db.py]
+ Auth --> Models
+ Models --> PG[(PostgreSQL)]
