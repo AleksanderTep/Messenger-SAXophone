@@ -78,7 +78,7 @@ def health():
 
 @app.get("/ready")
 def ready(db: Session = Depends(get_db)):
-    # Проверяем настоящий запрос к БД, а не только наличие настроек.
+    # Проверяем настоящий запрос к БД, а не только наличие настроек. но это странно бля
     try:
         db.execute(text("SELECT 1"))
     except SQLAlchemyError:
